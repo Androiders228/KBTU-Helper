@@ -2,8 +2,20 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.KBTUHelper" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/lightBlue</item>
+        <item name="colorOnPrimary">@color/lightBlue</item>
+        <item name="colorPrimaryVariant">@color/lightBlue</item>
+        <item name="statusBarBackground">?attr/colorPrimaryVariant</item>
+
     </style>
 
     <style name="Theme.KBTUHelper" parent="Base.Theme.KBTUHelper" />
+    
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">@color/lightBlue</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/kbtu_helper</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.KBTUHelper</item>
+
+    </style>
 </resources>
