@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Эти имена должны совпадать с теми, что в коде MapActivity.kt -->
+    <color name="md_theme_primary">#6750A4</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_surfaceContainerHighest">#E6E0E9</color>
+    <color name="md_theme_onSurface">#1C1B1F</color>
+</resources>
