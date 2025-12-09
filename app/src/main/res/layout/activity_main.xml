@@ -11,14 +11,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="KBTU Helper"
+        android:textColor="?attr/colorPrimary"
         android:textSize="34sp"
         android:textStyle="bold"
-        android:textColor="?attr/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/card_view_map"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.138" />
+
+    <ImageView
+        android:id="@+id/splashImage"
+        android:layout_width="245dp"
+        android:layout_height="174dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="Логотип"
+        android:src="@drawable/kbtu_helper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_text_view" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view_map"

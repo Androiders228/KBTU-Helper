@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.kbtu_helper.databinding.ActivityMapBinding
-import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MapActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMapBinding
-    private var currentFloor = 0 // Начинаем с 0, чтобы гарантированно загрузить первый этаж
+    private var currentFloor = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,30 +35,32 @@ class MapActivity : AppCompatActivity() {
     }
 
     private fun showFloor(floor: Int) {
-
         if (currentFloor == floor) return
 
-        val imageResource = when (floor) {
+        lifecycleScope.launch {
+            try {
+                val imageResource = loadFloorImage(floor)
+                binding.mapPhotoView.setImageResource(imageResource)
+                currentFloor = floor
+                updateButtonStates(floor)
+            } catch (e: Exception) {
+                Toast.makeText(this@MapActivity, "Карта для $floor этажа не найдена", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private suspend fun loadFloorImage(floor: Int): Int = withContext(Dispatchers.Default) {
+        when (floor) {
             1 -> R.drawable.floor_1
             2 -> R.drawable.floor_2
             3 -> R.drawable.floor_3
             4 -> R.drawable.floor_4
             5 -> R.drawable.floor_5
-            else -> return
-        }
-
-        try {
-            binding.mapPhotoView.setImageResource(imageResource)
-            currentFloor = floor
-            updateButtonStates(floor) // Обновляем внешний вид кнопок
-            // Toast.makeText(this, "$floor этаж", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "Карта для $floor этажа не найдена", Toast.LENGTH_SHORT).show()
+            else -> throw IllegalArgumentException("Нет такого этажа")
         }
     }
 
     private fun updateButtonStates(selectedFloor: Int) {
-
         val buttons = mapOf(
             1 to binding.btnFloor1,
             2 to binding.btnFloor2,
@@ -68,7 +73,6 @@ class MapActivity : AppCompatActivity() {
         val inactiveColor = ContextCompat.getColor(this, R.color.md_theme_surfaceContainerHighest)
         val activeTextColor = ContextCompat.getColor(this, R.color.md_theme_onPrimary)
         val inactiveTextColor = ContextCompat.getColor(this, R.color.md_theme_onSurface)
-
 
         buttons.forEach { (floor, button) ->
             if (floor == selectedFloor) {
