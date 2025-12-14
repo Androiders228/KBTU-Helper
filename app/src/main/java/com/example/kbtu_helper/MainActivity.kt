@@ -36,5 +36,8 @@ class MainActivity : AppCompatActivity() {
         binding.cardViewMap.setOnClickListener {
             startActivity(Intent(this, MapActivity::class.java))
         }
+        binding.cardViewNews.setOnClickListener {
+            startActivity(Intent(this, NewsActivity::class.java))
+        }
     }
 }
