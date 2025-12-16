@@ -39,5 +39,8 @@ class MainActivity : AppCompatActivity() {
         binding.cardViewNews.setOnClickListener {
             startActivity(Intent(this, NewsActivity::class.java))
         }
+        binding.cardViewNotes.setOnClickListener {
+            startActivity(Intent(this, NotesActivity::class.java))
+        }
     }
 }

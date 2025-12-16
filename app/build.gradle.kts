@@ -10,10 +10,11 @@ android {
 
     defaultConfig {
         applicationId = "com.example.kbtu_helper"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
     }
 
     buildFeatures {
@@ -28,6 +29,8 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+
 }
 
 dependencies {
@@ -66,5 +69,22 @@ dependencies {
 
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    val roomVersion = "2.6.1"
+    implementation ("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation ("androidx.room:room-ktx:$roomVersion")
+
+    val navVersion = "2.7.5"
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
+    val lifecycleVersion = "2.6.2"
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
 
 }
