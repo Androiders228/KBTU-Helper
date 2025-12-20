@@ -1,5 +1,6 @@
 package com.example.kbtu_helper
 
+import android.content.Context // Added
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.Toast
@@ -16,6 +17,9 @@ class MapActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMapBinding
     private var currentFloor = 0
 
+    private val PREFS_NAME = "KBTU_PREFS"
+    private val KEY_LAST_FLOOR = "last_floor"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,7 +27,11 @@ class MapActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupFloorButtons()
-        showFloor(1)
+
+        val savedFloor = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .getInt(KEY_LAST_FLOOR, 1)
+
+        showFloor(savedFloor)
     }
 
     private fun setupFloorButtons() {
@@ -43,9 +51,20 @@ class MapActivity : AppCompatActivity() {
                 binding.mapPhotoView.setImageResource(imageResource)
                 currentFloor = floor
                 updateButtonStates(floor)
+
+                saveFloorToPreferences(floor)
+
             } catch (e: Exception) {
                 Toast.makeText(this@MapActivity, "Карта для $floor этажа не найдена", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun saveFloorToPreferences(floor: Int) {
+        val sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putInt(KEY_LAST_FLOOR, floor)
+            apply()
         }
     }
 
