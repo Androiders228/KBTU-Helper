@@ -18,7 +18,6 @@ class NewsRepository(
             val response = RetrofitInstance.api.getEducationNews(apiKey = apiKey)
             val apiArticles = response.articles
 
-            // map API DTOs to Room entity, filter null urls
             val articles = apiArticles.mapNotNull { api ->
                 val url = api.url
                 if (url.isNullOrBlank()) null

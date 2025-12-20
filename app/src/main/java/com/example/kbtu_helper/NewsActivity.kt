@@ -24,13 +24,11 @@ class NewsActivity : AppCompatActivity() {
         binding = ActivityNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // setup DB + repo + VM
         val dao = NewsDatabase.getDatabase(this).newsDao()
         val repository = NewsRepository(API_KEY, dao)
         viewModel = ViewModelProvider(this, NewsViewModelFactory(repository))[NewsViewModel::class.java]
 
         adapter = NewsAdapter { articleUrl ->
-            // open in browser when an item is clicked
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(articleUrl))
             startActivity(intent)
         }
@@ -38,12 +36,10 @@ class NewsActivity : AppCompatActivity() {
         binding.recyclerNews.layoutManager = LinearLayoutManager(this)
         binding.recyclerNews.adapter = adapter
 
-        // Swipe to refresh
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.loadNews()
         }
 
-        // Observe
         viewModel.news.observe(this) { list ->
             adapter.submitList(list)
             binding.emptyTextView.alpha = if (list.isEmpty()) 1f else 0f
@@ -55,7 +51,6 @@ class NewsActivity : AppCompatActivity() {
             binding.emptyTextView.text = err ?: "No news available"
         }
 
-        // initial load
         viewModel.loadNews()
     }
 }
