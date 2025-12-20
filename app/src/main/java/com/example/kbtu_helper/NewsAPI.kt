@@ -4,10 +4,11 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApi {
-    @GET("top-headlines")
+    @GET("everything")
     suspend fun getEducationNews(
-        @Query("category") category: String = "education",
+        @Query("q") query: String = "education",
         @Query("apiKey") apiKey: String,
-        @Query("country") country: String = "us"
+        @Query("language") language: String = "en",
+        @Query("sortBy") sortBy: String = "publishedAt"
     ): NewsResponse
 }

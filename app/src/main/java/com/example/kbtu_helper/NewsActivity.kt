@@ -17,7 +17,7 @@ class NewsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewsBinding
     private lateinit var viewModel: NewsViewModel
     private lateinit var adapter: NewsAdapter
-    private val API_KEY = "03fe8f34745f4586990b26ea3a3414ed"
+    private val API_KEY = "03fe8f34745f4586990b26ea3a3414ed" //Ramadan's API_KEY pls don't use it often
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

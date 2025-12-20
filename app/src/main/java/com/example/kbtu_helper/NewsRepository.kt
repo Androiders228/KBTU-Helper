@@ -16,26 +16,26 @@ class NewsRepository(
     suspend fun getNews(): List<NewsArticle> = withContext(Dispatchers.IO) {
         try {
             val response = RetrofitInstance.api.getEducationNews(apiKey = apiKey)
-            val apiArticles = response.articles
+            val apiArticles = response.articles ?: emptyList()
 
-            val articles = apiArticles.mapNotNull { api ->
-                val url = api.url
-                if (url.isNullOrBlank()) null
-                else NewsArticle(
-                    url = url,
-                    title = api.title,
-                    description = api.description,
-                    urlToImage = api.urlToImage
-                )
-            }
-
-            dao.clearTable()
-            if (articles.isNotEmpty()) {
+            if (apiArticles.isNotEmpty()) {
+                val articles = apiArticles.mapNotNull { api ->
+                    if (api.url.isNullOrBlank()) null
+                    else NewsArticle(
+                        url = api.url,
+                        title = api.title,
+                        description = api.description,
+                        urlToImage = api.urlToImage
+                    )
+                }
+                dao.clearTable()
                 dao.insertArticles(articles)
+                return@withContext articles
             }
 
-            if (articles.isNotEmpty()) articles else dao.getArticles()
+            dao.getArticles()
         } catch (e: Exception) {
+            android.util.Log.e("NewsRepository", "Error fetching news", e)
             dao.getArticles()
         }
     }
