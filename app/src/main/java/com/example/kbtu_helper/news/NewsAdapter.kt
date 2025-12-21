@@ -1,4 +1,4 @@
-package com.example.kbtu_helper
+package com.example.kbtu_helper.news
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

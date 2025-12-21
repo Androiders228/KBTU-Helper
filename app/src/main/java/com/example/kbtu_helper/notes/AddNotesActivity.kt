@@ -1,4 +1,4 @@
-package com.example.kbtu_helper
+package com.example.kbtu_helper.notes
 
 import android.os.Bundle
 import android.widget.Toast
