@@ -1,4 +1,4 @@
-package com.example.kbtu_helper
+package com.example.kbtu_helper.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,11 @@ import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.example.kbtu_helper.databinding.ActivityMainBinding
-import kotlinx.coroutines.*
+import com.example.kbtu_helper.map.MapActivity
+import com.example.kbtu_helper.news.NewsActivity
+import com.example.kbtu_helper.notes.NotesActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.kbtu_helper
+package com.example.kbtu_helper.notes
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kbtu_helper.R
+import com.example.kbtu_helper.notes.UPDActivity
 
 class NotesAdapter(private var notes: List<NoteData>, activity: NotesActivity) :
     RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
