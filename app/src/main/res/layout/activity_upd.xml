@@ -7,33 +7,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".AddNotesActivity">
+    tools:context=".UPDActivity">
 
     <TextView
-        android:id="@+id/addNoteHeading"
+        android:id="@+id/editNoteHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
-        android:text="Добавить заметку"
+        android:text="Редактировать заметку"
         android:textColor="@color/darkBlue"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/saveButton"
+        android:id="@+id/updSaveButton"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_alignTop="@+id/addNoteHeading"
+        android:layout_alignTop="@+id/editNoteHeading"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:src="@drawable/baseline_check_circle_24" />
 
     <EditText
-        android:id="@+id/titleEditText"
+        android:id="@+id/updTitleEditText"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_below="@+id/addNoteHeading"
+        android:layout_below="@+id/editNoteHeading"
         android:layout_marginTop="16dp"
         android:background="@drawable/border_line"
         android:hint="Введите заголовок"
@@ -44,10 +44,10 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/contentEditText"
+        android:id="@+id/updContentEditText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/titleEditText"
+        android:layout_below="@+id/updTitleEditText"
         android:layout_marginTop="10dp"
         android:background="@drawable/border_line"
         android:gravity="top"

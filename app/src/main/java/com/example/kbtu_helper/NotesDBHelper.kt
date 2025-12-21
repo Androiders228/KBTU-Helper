@@ -29,7 +29,7 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         onCreate(db)
     }
 
-    suspend fun insertNote(note: NoteData) = withContext(Dispatchers.IO) {
+    fun insertNote(note: NoteData) {
         val db = writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_TITLE, note.title)
@@ -59,9 +59,30 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return@withContext notesList
     }
 
-    suspend fun deleteNote(noteId: Int) = withContext(Dispatchers.IO) {
+    fun updateNote(note: NoteData){
         val db = writableDatabase
-        db.delete(TABLE_NAME, "$COLUMN_ID = ?", arrayOf(noteId.toString()))
+        val values = ContentValues().apply {
+        put(COLUMN_TITLE, note.title)
+        put(COLUMN_CONTENT, note.content)
+        }
+        val whereClause = "$COLUMN_ID = ?"
+        val whereArgs = arrayOf(note.id.toString())
+        db.update(TABLE_NAME, values, whereClause, whereArgs)
         db.close()
+    }
+
+    fun getNoteById(noteId: Int): NoteData {
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ID = $noteId"
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+
+        val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
+        val title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITLE))
+        val content = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTENT))
+
+        cursor.close()
+        db.close()
+        return NoteData(id, title, content)
     }
 }

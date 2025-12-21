@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kbtu_helper.databinding.ActivityNotesBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NotesActivity : AppCompatActivity() {
 
@@ -24,7 +26,7 @@ class NotesActivity : AppCompatActivity() {
 
         notesAdapter = NotesAdapter(emptyList(), this)
 
-        binding.notesRecyclerView.layoutManager = LinearLayoutManager(this) // Crucial
+        binding.notesRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.notesRecyclerView.adapter = notesAdapter
 
         binding.addButton.setOnClickListener {
@@ -33,12 +35,16 @@ class NotesActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
     override fun onResume() {
         super.onResume()
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             val notes = db.getAllNotes()
-            notesAdapter.refreshData(notes)
+
+            withContext(Dispatchers.Main) {
+                notesAdapter.refreshData(notes)
+            }
         }
     }
-}
+
+    }
+
