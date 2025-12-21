@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_notes"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddNotesActivity">
+
+    <TextView
+        android:id="@+id/addNoteHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:text="Добавить заметку"
+        android:textColor="@color/darkBlue"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/saveButton"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/addNoteHeading"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/baseline_check_circle_24" />
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/addNoteHeading"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border_line"
+        android:hint="Введите заголовок"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/contentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titleEditText"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border_line"
+        android:gravity="top"
+        android:hint="Напишите заметку"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray"
+        android:textSize="18sp" />
+
+</RelativeLayout>
