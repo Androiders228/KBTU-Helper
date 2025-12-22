@@ -1,4 +1,4 @@
-package com.example.kbtu_helper
+package com.example.kbtu_helper.notes
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,16 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.launch
+import com.example.kbtu_helper.R
+import com.example.kbtu_helper.notes.UPDActivity
 
-class NotesAdapter(private var notes: List<NoteData>, private val activity: NotesActivity) :
+class NotesAdapter(private var notes: List<NoteData>, activity: NotesActivity) :
     RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
-
-    private val db: NotesDBHelper = NotesDBHelper(activity)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent, false)
@@ -34,15 +30,6 @@ class NotesAdapter(private var notes: List<NoteData>, private val activity: Note
             intent.putExtra("noteId", note.id)
             holder.itemView.context.startActivity(intent)
         }
-
-        holder.deleteButton.setOnClickListener {
-            activity.lifecycleScope.launch {
-                db.deleteNote(note.id)
-                val newNotes = db.getAllNotes()
-                refreshData(newNotes)
-                Toast.makeText(holder.itemView.context, "Заметка удалена", Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
     fun refreshData(newNotes: List<NoteData>) {
@@ -54,7 +41,5 @@ class NotesAdapter(private var notes: List<NoteData>, private val activity: Note
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         val contentTextView: TextView = itemView.findViewById(R.id.contentTextView)
         val updButton: ImageView = itemView.findViewById(R.id.updButton)
-
-        val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
     }
 }

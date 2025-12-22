@@ -1,12 +1,12 @@
-package com.example.kbtu_helper
+package com.example.kbtu_helper.map
 
-import android.content.Context // Added
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.kbtu_helper.R
 import com.example.kbtu_helper.databinding.ActivityMapBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class MapActivity : AppCompatActivity() {
 
         setupFloorButtons()
 
-        val savedFloor = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val savedFloor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             .getInt(KEY_LAST_FLOOR, 1)
 
         showFloor(savedFloor)
@@ -61,7 +61,7 @@ class MapActivity : AppCompatActivity() {
     }
 
     private fun saveFloorToPreferences(floor: Int) {
-        val sharedPref = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val sharedPref = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         with(sharedPref.edit()) {
             putInt(KEY_LAST_FLOOR, floor)
             apply()

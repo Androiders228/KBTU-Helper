@@ -1,4 +1,4 @@
-package com.example.kbtu_helper
+package com.example.kbtu_helper.news
 
 import android.content.Intent
 import android.net.Uri

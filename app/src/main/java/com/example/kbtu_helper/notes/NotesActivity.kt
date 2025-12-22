@@ -1,4 +1,4 @@
-package com.example.kbtu_helper
+package com.example.kbtu_helper.notes
 
 import android.content.Intent
 import android.os.Bundle
