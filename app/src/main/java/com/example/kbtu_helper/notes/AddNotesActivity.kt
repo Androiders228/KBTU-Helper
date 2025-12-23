@@ -10,14 +10,14 @@ import kotlinx.coroutines.launch
 class AddNotesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddNotesBinding
-    private lateinit var dbHelper: NotesDBHelper
+    private lateinit var db: NotesDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddNotesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dbHelper = NotesDBHelper(this)
+        db = NotesDatabase.getDatabase(this)
 
         binding.saveButton.setOnClickListener {
             val title = binding.titleEditText.text.toString()
@@ -27,7 +27,7 @@ class AddNotesActivity : AppCompatActivity() {
                 val note = NoteData(0, title, content)
 
                 lifecycleScope.launch {
-                    dbHelper.insertNote(note)
+                    db.notesDao().insert(note)
                     Toast.makeText(this@AddNotesActivity, "Заметка добавлена!", Toast.LENGTH_SHORT).show()
                     finish()
                 }

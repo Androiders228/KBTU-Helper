@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class NotesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNotesBinding
-    private lateinit var db: NotesDBHelper
+    private lateinit var db: NotesDatabase
     private lateinit var notesAdapter: NotesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +19,7 @@ class NotesActivity : AppCompatActivity() {
         binding = ActivityNotesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        db = NotesDBHelper(this)
+        db = NotesDatabase.getDatabase(this)
 
         notesAdapter = NotesAdapter(emptyList(), this)
 
@@ -35,7 +35,7 @@ class NotesActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch {
-            val notes = db.getAllNotes()
+            val notes = db.notesDao().getAllNotes()
             notesAdapter.refreshData(notes)
         }
     }
