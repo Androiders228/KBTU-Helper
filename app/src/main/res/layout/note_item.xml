@@ -24,10 +24,10 @@
             <TextView
                 android:id="@+id/titleTextView"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Title"
-                android:textColor="@color/lightBlue"
+                android:textColor="@color/darkBlue"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -39,6 +39,16 @@
                 android:padding="8dp"
                 android:src="@drawable/outline_contract_edit_24"
                 app:tint="@color/darkBlue" />
+
+            <ImageView
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/outline_delete_24"
+                app:tint="@color/darkBlue" />
+
         </LinearLayout>
 
         <TextView
@@ -49,7 +59,7 @@
             android:ellipsize="end"
             android:maxLines="5"
             android:text="Content"
-            android:textColor="@color/darkBlue" />
+            android:textColor="@color/lightBlue" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
